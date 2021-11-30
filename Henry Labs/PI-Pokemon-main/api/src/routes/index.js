@@ -87,19 +87,26 @@ router.get('/pokemons' , async (req, res) => {
         res.send(infoRutaPrincipal);
     
     }
-})
+});
 
 router.get('/pokemons/:id', async (req, res) => {
     const id = req.params.id;
-    const pokemonsTotal = await getAllPokemons();
+    const pokemonId = await getAllPokemons();
     if (id) {
-        let pokemonId= pokemonsTotal.filter(pokemon => pokemon.id === parseInt(id));
-        pokemonId.length?
-        res.status(200).send(pokemonId):
-        res.status(404).send("This Pokemon doesn't exist");
-    }
+        let pokemonI;
+        if (id.length > 1 ){
 
-})
+            pokemonI= pokemonId.filter(pokemon => pokemon.id === (id));
+
+        } else {
+            pokemonI= pokemonId.filter(pokemon => pokemon.id === parseInt(id));  
+
+        }
+        pokemonI.length?
+        res.status(200).send(pokemonI):
+        res.status(404).send("This Pokemon doesn't exist");  
+    }
+});
 
 
 router.get('/types' , async (req, res) => {
@@ -113,9 +120,13 @@ router.get('/types' , async (req, res) => {
         const allTypes = await Type.findAll();                  // busca en la tabla Type de la db
         res.send(allTypes);                                     // devuelve los types desde la db
     // console.log(typesInfo);
-})
+});
 
+
+//------------------------------------------------------------------------------------------------------
+// INTENTO 1 (TRAE TODA LA INFO + LOS TYPES EN LA BASE DE DATOS, PERO NO APARECE EN EL LOCALHOST))
 router.post('/pokemons', async (req,res) => {
+
 let {                    
     name,
     types,
@@ -138,18 +149,55 @@ let pokemonsCreated = await Pokemon.create ({    // Crea el pokemon con esos dat
     speed,
     height,
     weight,
-    createdInDb
+    createdInDb,
 })
 let typeDb = await Type.findAll({             // Se trae los types guardados anteriormente en la db
     where: {name: types}
 })
 pokemonsCreated.addType(typeDb)               // Agrega los types
-res.send('Pokemon created successfully')
-})
+res.send(pokemonsCreated)
+});
 
+// -------------------------------------------------------------------------------
+// INTENTO 2 (TRAE POR EL CONSOLE.LOG TODA LA INFO + LOS TYPES Y TAMBIÉN EN LA BASE DE DATOS, PERO NO APARECE EN EL LOCALHOST)
+// if (req.body){
+//     console.log('datos por body', req.body);
+//     Pokemon.create(req.body).then(pokemonCreated => res.send(pokemonCreated))
+// }
+// })
 
+//---------------------------------------------------------------------------------
+//INTENTO 3 (NO ROMPRE NADA PERO TAMPOCO HACE NADA PERO TIENE ESPERANZA)
+
+  // FALTA TRAER LOS TYPES DE LOS POKEMONS
+
+//   router.post('/pokemons', async (req, res) => {
+ 
+//     const typePoke = await Type.findAll()
     
+//
+// let typeOne = req.body.types.findOne(typePoke.map(el => {
+//     return { name: el.type.name, id: el.type.id}
+// }))
 
+//await routP.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))
+    // let typeOne = req.body.types
+
+    // if (typeOne === typePoke.map(el => {el.types.name.includes(typeOne)})){
+    //      const result = typePoke.map(el => {
+    //         return { 
+    //             name: el.type.name, 
+    //             id: el.type.id
+    //         }
+
+    //      })
+
+    //      Pokemon.create(req.body).then(pokemonCreated => {
+    //         res.send(pokemonCreated.addType(result))  
+    //    })
+    // }
+ 
+// })
 
 
 
