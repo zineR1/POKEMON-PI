@@ -39,9 +39,9 @@ export default function Home(){
     const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) 
 
 
-    // const paginado =  (pageNumber) => {
-    //     setCurrentPage(pageNumber)
-    // }
+    const paginado =  (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
 
     useEffect(() => {
       dispatch(getPokemons());
@@ -58,10 +58,6 @@ return (
         <Link to= '/pokemons'>New Pokemon</Link>
         <h1>POKEMON</h1>
         <button>Recharge Pokemons</button>  {/* RECARGA LOS POKEMONS */}
-
-         
-        <button onClick = {prevPage}> {'< Previous'} </button>
-        <button onClick = {nextPage}> {'Next >'} </button>
          
 
         <div>
@@ -105,11 +101,16 @@ return (
             <select>
                 <option value= 'a-z'>A-Z</option>
             </select>
-           {/* <Paginado
+            <br/>
+
+        <button onClick = {prevPage}> {'< Previous'} </button>        
+           <Paginado
            pokemonsPerPage = {pokemonsPerPage}
            allPokemons = {allPokemons.length}
            paginado = {paginado}
-           /> */}
+           />
+       <button onClick = {nextPage}> {'Next >'} </button>
+
 
 
 
