@@ -1,5 +1,5 @@
 import {GET_POKEMONS} from "../actions";
-import { GET_TYPES } from "../actions";
+// import { GET_TYPES } from "../actions";
 
 const initialState = {
     pokemon : []

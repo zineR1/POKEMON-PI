@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getPokemons,getTypes} from "../actions";
 import {Link} from 'react-router-dom';
 import Card from './Card';
+import Paginado from './Paginado';
 
 //El useState se utiliza para cambiar el estado de un componente.
 //El useEffect es un hook que se utiliza para renderizar el componente la primera vez y
@@ -15,10 +16,32 @@ export default function Home(){
 
     const dispatch = useDispatch()
     const allPokemons = useSelector(state => state.pokemon)
-    console.log(allPokemons, "home")
-    // const [currentPage, setCurrentPage] = useState(1)
-    // const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
-    // const indexOfLastPokemon = currentPage
+    // console.log(allPokemons, "home")
+    //PAGINADO
+    const [currentPage, setCurrentPage] = useState(1) // PÁGINA INICIAL
+
+   const nextPage = () => {
+       setCurrentPage(currentPage + 1)
+   }
+
+   const prevPage = () => {
+   if(currentPage > 0){
+       setCurrentPage(currentPage - 1)
+   } 
+}
+       
+   
+
+
+    const [pokemonsPerPage, setPokemonsPerPage] = useState(12) //CANTIDAD DE POKEMONS POR PÁGINA
+    const indexOfLastPokemon = currentPage * pokemonsPerPage //12
+    const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage //0
+    const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) 
+
+
+    // const paginado =  (pageNumber) => {
+    //     setCurrentPage(pageNumber)
+    // }
 
     useEffect(() => {
       dispatch(getPokemons());
@@ -35,6 +58,12 @@ return (
         <Link to= '/pokemons'>New Pokemon</Link>
         <h1>POKEMON</h1>
         <button>Recharge Pokemons</button>  {/* RECARGA LOS POKEMONS */}
+
+         
+        <button onClick = {prevPage}> {'< Previous'} </button>
+        <button onClick = {nextPage}> {'Next >'} </button>
+         
+
         <div>
             <select> 
                 <option value= 'asc'>Ascending</option> {/* FILTRANDO EN ORDEN ASCENDENTE */}
@@ -76,8 +105,16 @@ return (
             <select>
                 <option value= 'a-z'>A-Z</option>
             </select>
-           
-            {allPokemons.map(c => 
+           {/* <Paginado
+           pokemonsPerPage = {pokemonsPerPage}
+           allPokemons = {allPokemons.length}
+           paginado = {paginado}
+           /> */}
+
+
+
+
+            {currentPokemons?.map(c => 
     
     <div key={c.name}>
       <Card name={c.name} img={c.img} types={c.types.map( e => e.name + " ")}/>
