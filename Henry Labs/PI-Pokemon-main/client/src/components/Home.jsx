@@ -1,7 +1,7 @@
 import React from "react";
 import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getPokemons,getTypes} from "../actions";
+import {getPokemons,filterCreated,orderByName} from "../actions";
 import {Link} from 'react-router-dom';
 import Card from './Card';
 import Paginado from './Paginado';
@@ -19,13 +19,15 @@ export default function Home(){
     // console.log(allPokemons, "home")
     //PAGINADO
     const [currentPage, setCurrentPage] = useState(1) // PÁGINA INICIAL
+    const [orden, setOrden] = useState('')
+
 
    const nextPage = () => {
        setCurrentPage(currentPage + 1)
    }
 
    const prevPage = () => {
-   if(currentPage > 0){
+   if(currentPage > 1){
        setCurrentPage(currentPage - 1)
    } 
 }
@@ -47,30 +49,46 @@ export default function Home(){
       dispatch(getPokemons());
     },[dispatch])
 
-    // const allTypes = useSelector(state => state.types)
+    function handleClick(e){
+        e.preventDefault()
+        dispatch(getPokemons());
+    }
 
-    // useEffect(() => {
-    //     dispatch(getTypes());
-    // },[dispatch])
+    function handleFilterCreated(e){
+        dispatch(filterCreated(e.target.value))
+    }
+
+    function handleSort(e){
+        e.preventDefault();
+        dispatch(orderByName(e.target.value))
+        setCurrentPage(1);
+        setOrden(`Ordenado ${e.target.value}`)
+    }
+
+    // function handleFilterTypes(e){
+    //     e.preventDefault()
+    //     dispatch(getTypes(e.target.value))
+    // }
+  
 
 return (
     <div>
         <Link to= '/pokemons'>New Pokemon</Link>
         <h1>POKEMON</h1>
-        <button>Recharge Pokemons</button>  {/* RECARGA LOS POKEMONS */}
+        <button onClick = {e => {handleClick(e)}}>Recharge Pokemons</button>  {/* RECARGA LOS POKEMONS */}
          
 
         <div>
-            <select> 
-                <option value= 'asc'>Ascending</option> {/* FILTRANDO EN ORDEN ASCENDENTE */}
-                <option value= 'desc'>Descending</option>  {/* FILTRANDO EN ORDEN DESCENDENTE */}
+            <select button onChange = {e => {handleSort(e)}}> 
+                <option value= 'asc'>A-Z</option> {/* FILTRANDO EN ORDEN ASCENDENTE */}
+                <option value= 'desc'>Z-A</option>  {/* FILTRANDO EN ORDEN DESCENDENTE */}
             </select>
             {/* INTENTAR HACER UN MAP */}
 
              {/* ESTÁ FILTRANDO LOS POKEMONS POR TYPES */} 
             <select>
             
-            <option value= 'typ'>Types:</option>
+            <option value= 'types'>All Types</option>
             <option value= 'bug'>bug</option>
             <option value= 'dark'>dark</option>
             <option value= 'dragon'>dragon</option>
@@ -92,15 +110,15 @@ return (
             <option value= 'unknown'>unknown</option>
             <option value= 'water'>water</option>
             </select>
-            <select>
+            <select onChange={e => handleFilterCreated(e)}>
                  {/* FILTRA POR ORIGEN DEL POKEMON */}
                 <option value= 'All'>All</option>
                 <option value= 'Created'>Created</option>
                 <option value= 'Api'>Api Pokemon</option>
             </select>
-            <select>
-                <option value= 'a-z'>A-Z</option>
-            </select>
+            {/* <select>
+                <option value=  'a-z'>A-Z</option>
+            </select> */}
             <br/>
 
         <button onClick = {prevPage}> {'< Previous'} </button>        
