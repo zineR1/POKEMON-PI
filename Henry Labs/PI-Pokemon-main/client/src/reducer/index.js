@@ -1,4 +1,4 @@
-import {GET_POKEMONS,FILTER_CREATED, ORDER_BY_NAME} from "../actions";
+import {GET_POKEMONS,FILTER_CREATED, ORDER_BY_NAME, GET_NAME_POKEMON} from "../actions";
 
 
 const initialState = {
@@ -49,6 +49,12 @@ function rootReducer(state = initialState, action){
                    ...state,
                    pokemon: sortedArr
                }
+
+        case GET_NAME_POKEMON:
+            return{
+                ...state,
+                pokemon: action.payload
+            }
         
             
     //    case GET_TYPES:

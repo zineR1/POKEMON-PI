@@ -5,6 +5,7 @@ import {getPokemons,filterCreated,orderByName} from "../actions";
 import {Link} from 'react-router-dom';
 import Card from './Card';
 import Paginado from './Paginado';
+import SearchBar from "./SearchBar";
 
 //El useState se utiliza para cambiar el estado de un componente.
 //El useEffect es un hook que se utiliza para renderizar el componente la primera vez y
@@ -128,7 +129,7 @@ return (
            paginado = {paginado}
            />
        <button onClick = {nextPage}> {'Next >'} </button>
-
+       <SearchBar/>
 
 
 
