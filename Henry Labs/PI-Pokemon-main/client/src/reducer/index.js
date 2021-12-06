@@ -1,9 +1,10 @@
-import {GET_POKEMONS,FILTER_CREATED, ORDER_BY_NAME, GET_NAME_POKEMON} from "../actions";
+import {GET_POKEMONS,FILTER_CREATED, ORDER_BY_NAME, GET_NAME_POKEMON, GET_TYPES, POST_POKEMON, FILTER_TYPES} from "../actions";
 
 
 const initialState = {
     pokemon : [],
     allPokemons: [],
+    types: []
     
 }
 
@@ -25,6 +26,12 @@ function rootReducer(state = initialState, action){
                 ...state,
                  pokemon: createdFilter
             }
+        case POST_POKEMON:
+           return{
+               ...state
+           }
+
+
         case ORDER_BY_NAME:
             let sortedArr = action.payload === 'asc'?
                state.allPokemons.sort(function(a,b){
@@ -49,28 +56,52 @@ function rootReducer(state = initialState, action){
                    ...state,
                    pokemon: sortedArr
                }
+        // case ORDER_BY_ATTACK:
+        //     let sortedArr2 = action.payload === 'attack+'?
+        //        state.allPokemons.sort(function(a,b){
+        //            if(a.attack > b.attack){
+        //                return 1
+        //            }
+        //            if(b.attack > a.attack){
+        //                return -1
+        //            }
+        //            return 0
+        //        }):
+        //        state.allPokemons.sort(function(a,b){
+        //            if(a.attack > b.attack){
+        //                return -1
+        //            }
+        //            if(a.attack > b.attack){
+        //                return 1
+        //            }
+        //            return 0
+        //        })
+        //        return {
+        //            ...state,
+        //            pokemon: sortedArr2
+        //        }
+            
 
         case GET_NAME_POKEMON:
             return{
                 ...state,
                 pokemon: action.payload
             }
-        
-            
-    //    case GET_TYPES:
-    //     return{
-    //         ...state,
-    //         allTypes: action.payload,
-    //         allPokemons: action.payload
-            
-    //        }
 
-    //     case FILTER_TYPES:
-    //         const typesFiltered = action.payload === 'types' ? allPokemons.types.name : allPokemons.filter(el => el.types.name === action.payload)   
-    //         return{
-    //                 ...state,
-    //                 types: typesFiltered
-            // }
+
+    case GET_TYPES:
+        return{
+            ...state,
+            types: action.payload,
+        }
+
+        case FILTER_TYPES:
+            const typesFiltered = action.payload ===  state.types.filter(el => el.name)
+            console.log(typesFiltered)
+            return{
+                    ...state,
+                    types: typesFiltered
+            }
 
            default:
                return state;

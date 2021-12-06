@@ -1,7 +1,7 @@
 import React from "react";
 import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getPokemons,filterCreated,orderByName} from "../actions";
+import {getPokemons,filterCreated,orderByName,getTypes, filterTypes} from "../actions";
 import {Link} from 'react-router-dom';
 import Card from './Card';
 import Paginado from './Paginado';
@@ -17,6 +17,8 @@ export default function Home(){
 
     const dispatch = useDispatch()
     const allPokemons = useSelector(state => state.pokemon)
+    const types = useSelector(state => state.types)
+
     // console.log(allPokemons, "home")
     //PAGINADO
     const [currentPage, setCurrentPage] = useState(1) // PÁGINA INICIAL
@@ -50,6 +52,10 @@ export default function Home(){
       dispatch(getPokemons());
     },[dispatch])
 
+    useEffect(()=> {
+        dispatch(getTypes())
+    }, [])
+
     function handleClick(e){
         e.preventDefault()
         dispatch(getPokemons());
@@ -59,12 +65,23 @@ export default function Home(){
         dispatch(filterCreated(e.target.value))
     }
 
+    function handleFilterTypes(e){
+        dispatch(filterTypes(e.target.value))
+    }
+
     function handleSort(e){
         e.preventDefault();
         dispatch(orderByName(e.target.value))
         setCurrentPage(1);
         setOrden(`Ordenado ${e.target.value}`)
     }
+
+    // function handleSort2(e){
+    //     e.preventDefault();
+    //     dispatch(orderByAttack(e.target.value))
+    //     setCurrentPage(1);
+    //     setOrden(`Ordenado ${e.target.value}`)
+    // }
 
     // function handleFilterTypes(e){
     //     e.preventDefault()
@@ -84,10 +101,21 @@ return (
                 <option value= 'asc'>A-Z</option> {/* FILTRANDO EN ORDEN ASCENDENTE */}
                 <option value= 'desc'>Z-A</option>  {/* FILTRANDO EN ORDEN DESCENDENTE */}
             </select>
+
+            {/* <select button onChange = {e => {handleSort2(e)}}> 
+                <option value= 'attack+'>Attack+</option> 
+                <option value= 'attack-'>Attack-</option>  
+            </select> */}
+
             {/* INTENTAR HACER UN MAP */}
 
              {/* ESTÁ FILTRANDO LOS POKEMONS POR TYPES */} 
-            <select>
+             <select onChange = {e => handleFilterTypes(e)}>
+                {types.map(type => (
+                     <option value={type.name}>{type.name}</option>
+                ))}
+            </select>
+            {/* <select onChange = {e => handleFilterTypes(e)}>
             
             <option value= 'types'>All Types</option>
             <option value= 'bug'>bug</option>
@@ -110,7 +138,7 @@ return (
             <option value= 'steel'>steel</option>
             <option value= 'unknown'>unknown</option>
             <option value= 'water'>water</option>
-            </select>
+            </select> */}
             <select onChange={e => handleFilterCreated(e)}>
                  {/* FILTRA POR ORIGEN DEL POKEMON */}
                 <option value= 'All'>All</option>
