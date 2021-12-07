@@ -1,7 +1,7 @@
 import React from "react";
 import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getPokemons,filterCreated,orderByName,getTypes, filterTypes} from "../actions";
+import {getPokemons,filterCreated,orderByName,filterTypes, getDetail} from "../actions";
 import {Link} from 'react-router-dom';
 import Card from './Card';
 import Paginado from './Paginado';
@@ -17,13 +17,13 @@ export default function Home(){
 
     const dispatch = useDispatch()
     const allPokemons = useSelector(state => state.pokemon)
+    
     const types = useSelector(state => state.types)
 
     // console.log(allPokemons, "home")
     //PAGINADO
     const [currentPage, setCurrentPage] = useState(1) // PÁGINA INICIAL
     const [orden, setOrden] = useState('')
-
 
    const nextPage = () => {
        setCurrentPage(currentPage + 1)
@@ -38,7 +38,9 @@ export default function Home(){
    
 
 
-    const [pokemonsPerPage, setPokemonsPerPage] = useState(12) //CANTIDAD DE POKEMONS POR PÁGINA
+     //CANTIDAD DE POKEMONS POR PÁGINA
+    const [pokemonsPerPage] = useState(12)
+    // const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
     const indexOfLastPokemon = currentPage * pokemonsPerPage //12
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage //0
     const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) 
@@ -52,9 +54,9 @@ export default function Home(){
       dispatch(getPokemons());
     },[dispatch])
 
-    useEffect(()=> {
-        dispatch(getTypes())
-    }, [])
+    // useEffect(()=> {
+    //     dispatch(getTypes())
+    // }, [])
 
     function handleClick(e){
         e.preventDefault()
@@ -75,6 +77,7 @@ export default function Home(){
         setCurrentPage(1);
         setOrden(`Ordenado ${e.target.value}`)
     }
+
 
     // function handleSort2(e){
     //     e.preventDefault();
@@ -162,17 +165,15 @@ return (
 
 
 
-            {currentPokemons?.map(c => 
-    
-    <div key={c.name}>
+            {currentPokemons?.map(c => {
+        return(
+     <fragment>
+        <Link to = {'/detail/' + c.id}>
       <Card name={c.name} img={c.img} types={c.types.map( e => e.name + " ")}/>
-
-      
-     </div> 
-   
-    
-                   
- )}
+      </Link>
+     </fragment>
+        );             
+        })}
             
         </div>
     </div> 

@@ -72,7 +72,8 @@ router.get('/pokemons' , async (req, res) => {
     let pokemonsTotal = await getAllPokemons();
     let infoRutaPrincipal = pokemonsTotal.map(el => {
         return {
-            name: el.name, 
+            name: el.name,
+            id: el.id, 
             types: el.types,
             img: el.img
         }
@@ -82,7 +83,7 @@ router.get('/pokemons' , async (req, res) => {
         pokemonName ?
         res.send(pokemonName) :
         res.status(404).send("This Pokemon doesn't exist");
-        info   
+        // info  //(problema) 
     }else {
         res.send(infoRutaPrincipal);
     

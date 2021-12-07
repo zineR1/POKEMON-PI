@@ -4,10 +4,11 @@ export const GET_POKEMONS = 'GET_POKEMONS'
 export const FILTER_CREATED = 'FILTER_CREATED'
 export const ORDER_BY_NAME = 'ORDER_BY_NAME'
 // export const ORDER_BY_ATTACK = 'ORDER_BY_ATTACK'
-export const GET_NAME_POKEMON = 'GET_NAME_POKEMONS'
+export const GET_NAME_POKEMONS = 'GET_NAME_POKEMONS'
 export const GET_TYPES= 'GET_TYPES'
 export const POST_POKEMON= 'POST_POKEMON'
 export const FILTER_TYPES= 'FILTER_TYPES'
+export const GET_DETAILS= 'GET_DETAILS'
 
 export function getPokemons(){
 
@@ -59,10 +60,10 @@ return{
 export function getNamePokemons(name){
     return async function(dispatch){
         try{
-       const json1 = await axios.get("http://localhost:3001/pokemons?name=" + name); 
+       const json = await axios.get("http://localhost:3001/pokemons?name=" + name); 
         return dispatch({
-        type: GET_NAME_POKEMON,
-        payload: json1.data
+        type: GET_NAME_POKEMONS,
+        payload: json.data
         }) 
     } catch(error){
         console.log(error);
@@ -96,4 +97,19 @@ export function filterTypes(payload){
         type: FILTER_TYPES,
         payload
     }
+}
+
+export function getDetail(id){     //tenemos que recibir el número de id del pokemon
+    return async function (dispatch){
+        try{
+          const json = await axios.get('http://localhost:3001/pokemons/' + id);
+          return dispatch({
+              type: GET_DETAILS,
+              payload: json.data
+          })
+    }
+    catch(error){
+        console.log(error)
+    }
+} 
 }
