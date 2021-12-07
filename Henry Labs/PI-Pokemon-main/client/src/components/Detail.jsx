@@ -4,7 +4,7 @@ import {getDetail} from '../actions/';
 import {useDispatch, useSelector} from "react-redux";
 
 export default function Detail(props){
-    console.log(props)
+    
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -13,14 +13,14 @@ export default function Detail(props){
 
      
     const myPokemon = useSelector(state => state.detail)
-
+    
     return(
         <div>
             {
                 myPokemon.length > 0 ? 
                 <div>
                    <h1>I'm {myPokemon[0].name}</h1>
-                   <h4>{myPokemon[0].types.name} </h4>
+                   <h4>Types: {myPokemon[0].types.map(el=> el.name + " ")}</h4>
                    <img src={myPokemon[0].img}/>
                    <h4>Hp: {myPokemon[0].hp}</h4>
                    <h4>Attack: {myPokemon[0].attack} </h4>

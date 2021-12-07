@@ -1,5 +1,5 @@
 import {GET_POKEMONS,FILTER_CREATED, ORDER_BY_NAME, GET_NAME_POKEMONS, GET_TYPES, 
-        POST_POKEMON, FILTER_TYPES,GET_DETAILS} from "../actions";
+        POST_POKEMON, FILTER_TYPES,GET_DETAILS,ORDER_BY_ATTACK} from "../actions";
 
 
 const initialState = {
@@ -21,26 +21,49 @@ function rootReducer(state = initialState, action){
                allPokemons: action.payload
            }
         case FILTER_CREATED:
-        const createdFilter = action.payload === 'Created' ? state.allPokemons.filter(el => el.createdInDb) : state.allPokemons.filter(e => !e.createdInDb) 
-        console.log(createdFilter)
+        const createdFilter = action.payload === 'Created' ? state.allPokemons.filter(el => el.createdInDb) : state.allPokemons.filter(el => !el.createdInDb) 
 
             return{
                 ...state,
-                 pokemon: createdFilter
+                pokemon: createdFilter
             }
         case POST_POKEMON:
            return{
                ...state
            }
 
+        case ORDER_BY_ATTACK:
+            let sortedArr2 = action.payload === 'attack'?
+               state.allPokemons.sort(function(a,b){
+                   if(a.attack > b.attack){
+                       return 1
+                   }
+                   if(b.attack > a.attack){
+                       return -1
+                   }
+                   return 0
+               }):
+               state.allPokemons.sort(function(a,b){
+                   if(a.attack > b.attack){
+                       return -1
+                   }
+                   if(a.attack > b.attack){
+                       return 1
+                   }
+                   return 0
+               })
+               return {
+                   ...state,
+                   pokemon: sortedArr2
+               }
 
         case ORDER_BY_NAME:
             let sortedArr = action.payload === 'asc'?
                state.allPokemons.sort(function(a,b){
-                   if(a.name > b.name){
+                   if(a.name.toLowerCase() > b.name.toLowerCase()){
                        return 1
                    }
-                   if(b.name > a.name){
+                   if(b.name.toLowerCase() > a.name.toLowerCase()){
                        return -1
                    }
                    return 0
@@ -58,32 +81,8 @@ function rootReducer(state = initialState, action){
                    ...state,
                    pokemon: sortedArr
                }
-        // case ORDER_BY_ATTACK:
-        //     let sortedArr2 = action.payload === 'attack+'?
-        //        state.allPokemons.sort(function(a,b){
-        //            if(a.attack > b.attack){
-        //                return 1
-        //            }
-        //            if(b.attack > a.attack){
-        //                return -1
-        //            }
-        //            return 0
-        //        }):
-        //        state.allPokemons.sort(function(a,b){
-        //            if(a.attack > b.attack){
-        //                return -1
-        //            }
-        //            if(a.attack > b.attack){
-        //                return 1
-        //            }
-        //            return 0
-        //        })
-        //        return {
-        //            ...state,
-        //            pokemon: sortedArr2
-        //        }
-            
 
+    
         case GET_NAME_POKEMONS:
             return{
                 ...state,
@@ -99,7 +98,7 @@ function rootReducer(state = initialState, action){
 
         case FILTER_TYPES:
             const typesFiltered = action.payload ===  state.types.filter(el => el.name)
-            console.log(typesFiltered)
+            // console.log(typesFiltered)
             return{
                     ...state,
                     types: typesFiltered

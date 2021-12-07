@@ -82,7 +82,7 @@ return(
     <div>
         <Link to= '/home'><button>Back</button></Link>
         <h1>Create Pokemon</h1>  
-        <form onSubmit={e => {handleSubmit(e)}}>
+        <form onSubmit={handleSubmit}>
             <div>
             <label>Name:</label>
             <input
@@ -169,16 +169,16 @@ return(
             {/* <a>Types:</a> */}
             <select onChange={e => handleSelect(e)}>
                 {types.map((type) => (
-                     <option key={type.name} value={type.name}>{type.name}</option>
+                     <option key={type.id} value={type.name}>{type.name}</option>
                 ))}
             </select>
             {/* <ul><li>{input.types.map(el => el + ", ")}</li></ul> */}
             <button type='submit'>Create Pokemon</button>
         </form>
       {input.types.map(el =>
-        <div className = 'divType'>
-            <p>{el}</p>
-            <button className="botonX" onClick={()=> handleDelete(el)}>x</button>
+        <div className = 'divType' key={el}>
+            <p key={el}>{el}</p>
+            <button key={el} className="botonX" onClick={()=> handleDelete(el)}>x</button>
         </div>
         )}
 

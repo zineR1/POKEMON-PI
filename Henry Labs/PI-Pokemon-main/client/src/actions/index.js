@@ -3,7 +3,7 @@ import axios from "axios";
 export const GET_POKEMONS = 'GET_POKEMONS'
 export const FILTER_CREATED = 'FILTER_CREATED'
 export const ORDER_BY_NAME = 'ORDER_BY_NAME'
-// export const ORDER_BY_ATTACK = 'ORDER_BY_ATTACK'
+export const ORDER_BY_ATTACK = 'ORDER_BY_ATTACK'
 export const GET_NAME_POKEMONS = 'GET_NAME_POKEMONS'
 export const GET_TYPES= 'GET_TYPES'
 export const POST_POKEMON= 'POST_POKEMON'
@@ -39,23 +39,12 @@ return{
     }
 }
 
-// export function orderByAttack(name){
-//     return async function(dispatch){
-//         try{
-//        const json2 = await axios.get("http://localhost:3001/pokemons?name=" + name); 
-       
-//     }catch(error){
-//             console.log(error);
-//         }
-// }
-// }
-
-// export function filterByAttack(payload){
-//     return{
-//         type: ORDER_BY_ATTACK,
-//         payload
-//     }
-// }
+export function orderByAttack(payload){
+    return{
+        type: ORDER_BY_ATTACK,
+        payload
+    }
+}
 
 export function getNamePokemons(name){
     return async function(dispatch){
