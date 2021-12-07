@@ -75,7 +75,10 @@ router.get('/pokemons' , async (req, res) => {
             name: el.name,
             id: el.id, 
             types: el.types,
-            img: el.img
+            img: el.img,
+            attack: el.attack,
+            createdInDb: el.createdInDb
+
         }
     })
     if(name){
@@ -128,29 +131,17 @@ router.get('/types' , async (req, res) => {
 // INTENTO 1 (TRAE TODA LA INFO + LOS TYPES EN LA BASE DE DATOS, PERO NO APARECE EN EL LOCALHOST))
 router.post('/pokemons', async (req,res) => {
 
-let {                    
-    name,
-    types,
-    img,
-    hp,
-    attack,
-    defense,
-    speed,
-    height,
-    weight,
-    createdInDb
-} = req.body         // Se trae la info por body
-
+let {types} = req.body         // Se trae la info por body
+    
 let pokemonsCreated = await Pokemon.create ({    // Crea el pokemon con esos datos
-    name,
-    img,
-    hp,
-    attack,
-    defense,
-    speed,
-    height,
-    weight,
-    createdInDb,
+    name: req.body.name.toLowerCase(),
+    img: req.body.img,
+    hp: Number(req.body.hp),
+    attack: Number(req.body.attack),
+    defense: Number(req.body.defense),
+    speed: Number(req.body.speed),
+    height: Number(req.body.height),
+    weight: Number(req.body.weight),
 })
 let typeDb = await Type.findAll({             // Se trae los types guardados anteriormente en la db
     where: {name: types}
