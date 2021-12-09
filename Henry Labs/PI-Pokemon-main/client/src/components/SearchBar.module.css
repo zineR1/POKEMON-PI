@@ -1,0 +1,26 @@
+.Searchinput{
+    background-color: rgb(253, 231, 33);
+    border-radius: 5px;
+    border-width: medium;
+    border-color: black;
+    /* margin: 20px; */
+    padding:8px;
+    font-family:monospace;
+    color: black;
+}
+
+.SearchBarDiv{
+    padding:20px;
+
+}
+
+.Searchbutton{
+    background-color: rgb(14, 13, 13);
+    outline-color: rgb(253, 231, 33);
+    color:rgb(253, 231, 33);
+    border-radius: 5px;
+    border-width:thin;
+    /* margin: 20px; */
+    padding:8px;
+    font-family:monospace; 
+}

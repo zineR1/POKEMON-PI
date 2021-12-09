@@ -27,6 +27,7 @@ function rootReducer(state = initialState, action){
                 ...state,
                 pokemon: createdFilter
             }
+            
         case POST_POKEMON:
            return{
                ...state
@@ -97,12 +98,14 @@ function rootReducer(state = initialState, action){
         }
 
         case FILTER_TYPES:
-            const typesFiltered = action.payload ===  state.types.filter(el => el.name)
-            // console.log(typesFiltered)
+        const result = action.payload 
+        const typesFiltered = state.allPokemons.filter(el=> el.types.some(e => e.name === result)).map(el=>console.log(el))
             return{
                     ...state,
-                    types: typesFiltered
+                    allPokemons: typesFiltered
             }
+        
+
         case GET_DETAILS:
             return {
                 ...state,

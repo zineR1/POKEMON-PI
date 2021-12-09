@@ -24,16 +24,17 @@ export default function Home(){
     const [currentPage, setCurrentPage] = useState(1) // PÁGINA INICIAL
     const [orden, setOrden] = useState('')
     const [orden2, setOrden2] = useState('')
+    // const [pokemon, setPokemon] = useState(allPokemons)
 
-   const nextPage = () => {
-       setCurrentPage(currentPage + 1)
-   }
+//    const nextPage = () => {
+//        setCurrentPage(currentPage + 1)
+//    }
 
-   const prevPage = () => {
-   if(currentPage > 1){
-       setCurrentPage(currentPage - 1)
-   } 
-}
+//    const prevPage = () => {
+//    if(currentPage > 1){
+//        setCurrentPage(currentPage - 1)
+//    } 
+// }
        
    
 
@@ -86,24 +87,31 @@ export default function Home(){
         setOrden2(`Ordenado ${e.target.value}`)
     }
     
-    function handleFilterTypes(e){
-            dispatch(filterTypes(e.target.value))
-        }
         
 return (
-    <div>
-        <Link to= '/pokemons'>New Pokemon</Link>
-        <h1>POKEMON</h1>
-        <button onClick = {e => {handleClick(e)}}>Recharge Pokemons</button>  
+    <div className={style.Background}>
          
 
-        <div>
-            <select onChange = {e => {handleSort(e)}}> 
+        <div className={style.header}>
+            <a href="/home">
+        <img className={style.pokemon} src= "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png " alt="" width= "250px" height='90px'/>
+        </a>
+        <a href="/pokemons">
+        {/* <Link to= '/pokemons'>New Pokemon</Link> */}
+        {/* Crear Pokemon */}
+        <img className={style.play} src="https://pngimg.com/uploads/pokeball/pokeball_PNG3.png" alt="" width= "70px" height='70px'/>
+        </a>        
+        <br/>
+        
+        <SearchBar/>
+            <select className={style.botonfilter} onChange = {e => {handleSort(e)}}> 
+                <option value=''>Filter by Letter </option>
                 <option value= 'asc'>A-Z</option> {/* FILTRANDO EN ORDEN ASCENDENTE */}
                 <option value= 'desc'>Z-A</option>  {/* FILTRANDO EN ORDEN DESCENDENTE */}
             </select>
 
-            <select onChange = {e => {handleSort2(e)}}> 
+            <select className={style.botonfilter} onChange = {e => {handleSort2(e)}}> 
+                <option value=''>Filter bt Attack </option>
                 <option value= 'attack'>Attack+</option> 
                 <option value= 'defense'>Attack-</option>  
             </select> 
@@ -111,15 +119,38 @@ return (
             {/* INTENTAR HACER UN MAP */}
 
              {/* ESTÁ FILTRANDO LOS POKEMONS POR TYPES */} 
-             <select name="type" onChange = {e => handleFilterTypes(e)}>
-                 <option value=''>Filtrar x Tipo </option>
+             <select className={style.botonfilter} name="type" onChange = {e => handleFilterTypes(e)}>
+                 <option value=''>Filter by Types </option>
                 {types?.map(type => (
                      <option value={type.name} key={type.id}>{type.name}</option>
                 ))}
             </select>
+
+                 {/* <select className={style.botonfilter} name="type" onChange = {e => handleFilterTypes(e)}>
+                    <option hidden>Filter options</option>
+                    <option value="normal">Type: normal</option>
+                    <option value="fighting">Type: fighting</option>
+                    <option value="flying">Type: flying</option>
+                    <option value="poison">Type: poison</option>
+                    <option value="ground">Type: ground</option>
+                    <option value="rock">Type: rock</option>
+                    <option value="bug">Type: bug</option>
+                    <option value="ghost">Type: ghost</option>
+                    <option value="steel">Type: steel</option>
+                    <option value="fire">Type: fire</option>
+                    <option value="water">Type: water</option>
+                    <option value="grass">Type: grass</option>
+                    <option value="electric">Type: electric</option>
+                    <option value="psychic">Type: psychic</option>
+                    <option value="ice">Type: ice</option>
+                    <option value="dragon">Type: dragon</option>
+                    <option value="dark">Type: dark</option>
+                    <option value="fairy">Type: fairy</option>
+                </select> */}
           
-            <select onChange={e => handleFilterCreated(e)}>
+            <select className={style.botonfilter} onChange={e => handleFilterCreated(e)}>
                  {/* FILTRA POR ORIGEN DEL POKEMON */}
+                 <option value=''>Filter by Origin</option>
                 <option value= 'All'>All</option>
                 <option value= 'Created'>Created</option>
                 <option value= 'Api'>Api Pokemon</option>
@@ -127,25 +158,24 @@ return (
             {/* <select>
                 <option value=  'a-z'>A-Z</option>
             </select> */}
-            <br/>
-
-        <button onClick = {prevPage}> {'< Previous'} </button>        
+        <br/>
+    <button className={style.botonheader}onClick = {e => {handleClick(e)}}>Refresh Pokemons</button>  
+    <br/>
+    {/* <button className={style.prevnext} onClick = {prevPage}> {'< Previous'} </button>         */}
            <Paginado
            pokemonsPerPage = {pokemonsPerPage}
            allPokemons = {allPokemons.length}
            paginado = {paginado}
            />
-       <button onClick = {nextPage}> {'Next >'} </button>
-       <SearchBar/>
+       {/* <button className={style.prevnext} onClick = {nextPage}> {'Next >'} </button> */}
 
-
-
-
+     </div>
+      <div className={style.grid}>
             {currentPokemons?.map(c => {
         return(
 
-        <Link to = {'/detail/' + c.id}  key={c.id}>
-      <Card name={c.name} img={c.img} types={c.types.map( e => e.name + " ")}/>
+        <Link className={style.btnName} to= {'/detail/' + c.id}  key={c.id}>
+      <Card className={style.grid} name={c.name} img={c.img} types={c.types.map( e => e.name + " ")}/>
       </Link>
       
         );             

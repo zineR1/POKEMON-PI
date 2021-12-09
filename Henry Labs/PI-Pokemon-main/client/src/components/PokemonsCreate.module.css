@@ -1,0 +1,72 @@
+.btnBack{
+    background-color: rgb(253, 231, 33);
+    border-radius: 5px;
+    border-width: thin;
+    /* margin: 20px; */
+    size-adjust: 20px;
+    padding:7px;
+    font-family:monospace;
+    margin: 20px;
+}
+
+.btnBack:hover{
+    box-shadow: 0 12px 16px rgba(243, 243, 243, 0.2);
+    transform: scale(1.1);
+}
+
+.input{
+    background-color: rgb(253, 231, 33);
+    border-radius: 5px;
+    border-width: medium;
+    border-color: black;
+    margin: 5px;
+    padding:4px;
+    font-family:monospace;
+    color: black;
+
+}
+
+.btnCreate{
+    background-color: rgb(14, 13, 13);
+    outline-color: rgb(253, 231, 33);
+    color:rgb(253, 231, 33);
+    border-radius: 5px;
+    border-width:thin;
+    /* margin: 20px; */
+    padding:8px;
+    font-family:monospace; 
+    margin-top: 20px;
+    margin-bottom: 100px;
+    
+}
+
+.types{
+        background-color: rgb(14, 13, 13);
+        outline-color: rgb(253, 231, 33);
+        color:rgb(253, 231, 33);
+        border-radius: 5px;
+        border-width: thin;
+        margin: 20px;
+        padding:8px;
+        font-family:monospace; 
+    }
+    
+    .types:hover{
+    box-shadow: 0 12px 16px rgba(243, 243, 243, 0.2);
+    }
+
+    .gral{
+    background-image: url(../pokemon-unite_1920x1080_8254.jpg);
+    background-repeat: no-repeat; 
+    background-size: cover;
+    }
+
+    .hola{
+        background-color: tomato;
+    }
+
+    .create{
+    height: 100px;
+    width: 380px;    
+    margin-top: 50px;
+    }

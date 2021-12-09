@@ -46,6 +46,17 @@ export function orderByAttack(payload){
     }
 }
 
+export function postPokemon(payload){
+    return async function(dispatch){
+         const response = await axios.post('http://localhost:3001/pokemons', payload);
+         console.log(response)
+         return dispatch({
+            type: POST_POKEMON,
+            payload: response
+        })
+    }
+}
+
 export function getNamePokemons(name){
     return async function(dispatch){
         try{
@@ -70,16 +81,6 @@ export function getTypes(){
     }
 } 
 
-export function postPokemon(payload){
-    return async function(dispatch){
-         const response = await axios.post('http://localhost:3001/pokemons', payload);
-         console.log(response)
-         return dispatch({
-            type: POST_POKEMON,
-            payload: response
-        })
-    }
-}
 
 export function filterTypes(payload){
     return{

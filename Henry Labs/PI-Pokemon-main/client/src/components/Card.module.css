@@ -1,11 +1,36 @@
 .Card{
     border-radius: 10px;
     background-color: rgb(219, 212, 212);
-    margin: 500px;
-    margin-top: 50px;
+    /* margin: 480px; */
+    /* margin-top: 30px; */
+    background-image: url(../fondo-memphis-semitono-azul-lineas-amarillas-formas-circulos_1017-31954.jpg);
+    
+}
+
+
+.Card:hover{
+    transform: translateY(-15px);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
 }
 
 .name{
-    color: black;
+    color: rgb(255, 238, 0);;
     text-decoration:none;
+    padding-top: 50px;
+    margin-top: 30px;
+    font-size: 25px;
+    font-family: 'Lucida Sans';
+    text-decoration: yellow;
+    
+}
+
+.types{
+    color:white;
+    font-size: 15px;
+    font-family: 'Lucida Sans';
+    text-decoration: none;
+}
+
+.img{
+    margin-bottom: 60px;
 }
