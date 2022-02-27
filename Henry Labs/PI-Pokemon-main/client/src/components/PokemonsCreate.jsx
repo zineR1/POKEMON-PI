@@ -2,7 +2,9 @@ import React, {useState,useEffect} from "react";
 import {Link, useHistory} from "react-router-dom";
 import {postPokemon, getTypes} from '../actions/';
 import {useDispatch, useSelector} from "react-redux";
-import style from "./PokemonsCreate.module.css"
+import style from "./PokemonsCreate.module.css";
+import backicon from "../back.png";
+
 
 function validate(input){
     let errors = {};
@@ -92,11 +94,11 @@ return(
                 ))}
             </select>
             <br/>
-            <label>Name: </label>
             <input className={style.input}
             type= "text"
             value= {input.name}
             name = "name"
+            placeholder = "Pokemon Name:"
             onChange={e => handleChange(e)}
             />
             {errors.name && (
@@ -105,71 +107,71 @@ return(
             </div>
         
             <div>
-            <label>Image: </label>
             <input className={style.input}
             type= "text"
             value= {input.img}
             name = "img"
+            placeholder = "Image Url:"
             onChange={e => handleChange(e)}
             />
             </div>
 
             <div>
-            <label>Hp: </label>
             <input className={style.input}
             type= "number"
             value= {input.hp}
             name = "hp"
+            placeholder = "Hp Value:"
             onChange={e => handleChange(e)}
             />
             </div>
 
             <div>
-            <label>Attack: </label>
             <input className={style.input}
             type= "number"
             value= {input.attack}
             name = "attack"
+            placeholder = "Attack Value:"
             onChange={e => handleChange(e)}
             />
             </div>
 
             <div>
-            <label>Defense: </label>
             <input className={style.input}
             type= "defense"
             value= {input.defense}
             name = "defense"
+            placeholder = "Defense Value:"
             onChange={e => handleChange(e)}
             />
             </div>
 
             <div>
-            <label>Speed: </label>
             <input className={style.input}
             type= "number"
             value= {input.speed}
             name = "speed"
+            placeholder = "Speed Value:"
             onChange={e => handleChange(e)}
             />
             </div>
 
             <div>
-            <label>Height: </label>
             <input className={style.input}
             type= "number"
             value= {input.height}
             name = "height"
+            placeholder = "Heigh:"
             onChange={e => handleChange(e)}
             />
             </div>
 
             <div>
-            <label>Weight: </label>
             <input className={style.input}
             type= "number"
             value= {input.weight}
             name = "weight"
+            placeholder = "Weight:"
             onChange={e => handleChange(e)}
             />
             </div>
@@ -181,8 +183,9 @@ return(
             <button key={el} className="botonX" onClick={()=> handleDelete(el)}>x</button>
         </div>
         )}
-      <Link to= '/home'><button className={style.btnBack}>Back</button></Link>
-    </div>
+          <Link to= '/home'>
+                <button className={style.btnBack}><img src={backicon} alt="goback" height="20px" width="20px"/></button>
+            </Link>    </div>
 )
 
 }

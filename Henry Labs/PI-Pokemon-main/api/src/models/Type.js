@@ -8,11 +8,6 @@ module.exports = (sequelize) => {
   sequelize.define('type', {
 // En este caso no agrego Id porque no es como el caso de los pokemons que la info
 // podía provenir de la Db o de la api así que no corro riesgo de colisiones.
-id:{
-type: DataTypes.INTEGER,
-primaryKey: true,
-allowNull: false
-},  
 
 name: {
       type: DataTypes.STRING,

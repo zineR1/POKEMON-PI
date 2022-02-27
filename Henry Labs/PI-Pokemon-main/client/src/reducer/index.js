@@ -89,6 +89,7 @@ function rootReducer(state = initialState, action){
                 ...state,
                 pokemon: action.payload
             }
+        
 
 
     case GET_TYPES:

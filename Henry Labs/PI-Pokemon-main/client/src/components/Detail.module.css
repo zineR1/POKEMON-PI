@@ -1,7 +1,20 @@
+body{
+    height: 100%;
+    
+}
+
+.main1{
+    /* background-color: red; */
+    height: 100%;
+}
 .detailgral{
-background-image: url(../criaturas-pokemon.jpg);
-background-repeat: no-repeat; 
+    background-image: url(../criaturas-pokemon.jpg);
+    background-repeat: no-repeat; 
     background-size:cover;
+}
+
+.detailgral button{
+    margin-top: 15px;
 }
 
 .container{
@@ -12,7 +25,8 @@ background-repeat: no-repeat;
         border-radius: 15px;
         width: 40vw;
         margin-top: 50px;
-        margin-left: 350px;
+        margin: 0 auto;
+        /* margin-left: 350px; */
         /* margin-bottom: 50px; */
         display: flex;
         justify-content: center;

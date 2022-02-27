@@ -100,7 +100,7 @@ router.get('/pokemons/:id', async (req, res) => {
         let pokemonI;
         if (id.length > 1 ){
 
-            pokemonI= pokemonId.filter(pokemon => pokemon.id === (id));
+            pokemonI= pokemonId.filter(pokemon => pokemon.id == (id));
 
         } else {
             pokemonI= pokemonId.filter(pokemon => pokemon.id === parseInt(id));  
@@ -115,7 +115,7 @@ router.get('/pokemons/:id', async (req, res) => {
 
 router.get('/types' , async (req, res) => {
     const apiTypes = await axios.get('https://pokeapi.co/api/v2/type'); //Trae los types de la API
-    const typesInfo = apiTypes.data.results.map(el => el.name)                                  
+    const typesInfo = apiTypes.data.results.map(el => el.name)  
         typesInfo.forEach(el => {                               
             Type.findOrCreate({                                 // Crea los valores en la db
                 where: {name: el}
@@ -123,7 +123,7 @@ router.get('/types' , async (req, res) => {
         })
         const allTypes = await Type.findAll();                  // busca en la tabla Type de la db
         res.send(allTypes);                                     // devuelve los types desde la db
-    // console.log(typesInfo);
+    console.log(typesInfo,"hola");
 });
 
 

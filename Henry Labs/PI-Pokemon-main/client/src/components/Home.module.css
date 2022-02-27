@@ -1,20 +1,41 @@
-.Backgound{
-    /* background-image: url(../grey-wallpapers-3d-stereo-geometric-abstract.jpg); */
-    background-color: blueviolet;
+body{
+    background-color: rgb(253, 236, 77);
+
+}
+
+body::-webkit-scrollbar{
+width: 12px;
+/* border-radius: 10px; */
+/* background-color: rgb(3, 37, 231); */
+}
+
+body::-webkit-scrollbar-thumb{
+    background-color: rgb(173, 173, 173);
+    border-radius: 6px;
+
+}
+
+.loader_div{
+    margin-top: 40px;
+}
+
+.principal{
+    /* background-image: url(../18110.jpg); */
+    background-color: rgb(253, 236, 77);
+    background-repeat: no-repeat; 
+    background-size: cover;
+    height: 100%;
+    -webkit-scrollbar-track-piece-color: red;
 }
 
 .grid{
     display: grid;
-    padding: 100px;
+    margin: 50px 90px;
     -ms-grid-column-align: center;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    background-image: url(../e5937f6be65c37bc8d7bb5f85ca928ab.jpg);
-    background-repeat: no-repeat; 
-    background-size: cover;
+    grid-template-rows: 1fr 1fr 1fr ;
     height: -500px;
     grid-gap: 20px;
-    
 }
 
 .header{
@@ -42,6 +63,8 @@ margin-left: 50px;
     margin: 20px;
     padding:8px;
     font-family:monospace;
+    cursor: pointer;
+
     
 }
 
@@ -59,6 +82,8 @@ margin-left: 50px;
     margin: 20px;
     padding:8px;
     font-family:monospace; 
+    cursor: pointer;
+
 }
 
 .botonfilter:hover{
@@ -68,29 +93,18 @@ box-shadow: 0 12px 16px rgba(243, 243, 243, 0.2);
 .play{
  margin: 20px;
  display: relative;
- right: 20px;    
+ right: 0px;    
 }
 .play:hover{
     /* box-shadow: 0 12px 16px rgba(243, 243, 243, 0.2); */
     transform: scale(1.1);
 }
 
-.prevnext{
-    background-color: rgb(14, 13, 13);
-    outline-color: rgb(253, 231, 33);
-    color:rgb(253, 231, 33);
-    border-radius: 5px;
-    border-width:1.5px;
-    margin: 8px;
-    /* padding:8px; */
-    font-family:monospace; 
-    /* display: inline; */
-}
-
-.prevnext:hover{
-    box-shadow: 0 12px 16px rgba(243, 243, 243, 0.2);
-    }
-
 .btnName{
     text-decoration: none;
+}
+
+.paginado{
+    margin: 30px 0px;
+    /* margin-left: 80px; */
 }
